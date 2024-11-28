@@ -18,14 +18,20 @@ import com.cinexpress.videofriend.services.CompanyService;
 @RestController
 @RequestMapping("/company")
 public class CompanyController {
-     @Autowired
+    @Autowired
     CompanyService companyService;
-    
+
     @PostMapping("")
     public ResponseEntity<Company> createCompany(@RequestBody CompanyDTO companyDTO) {
         Company newCompany = companyService.createCompany(companyDTO);
         return new ResponseEntity<>(newCompany, HttpStatus.CREATED);
     }
+    /*
+     * {
+     * "name": "Example Company 3432",
+     * "description": "This is an example company description."
+     * }
+     */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
@@ -38,9 +44,16 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Company> updateCompany(@PathVariable Long id,@RequestBody CompanyDTO companyDTO) {
-        Company updatedCompany = companyService.updateCompany(id,companyDTO);
+    public ResponseEntity<Company> updateCompany(@PathVariable Long id, @RequestBody CompanyDTO companyDTO) {
+        Company updatedCompany = companyService.updateCompany(id, companyDTO);
         return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
 
     }
+
+    /*
+     * {
+     * "name": "Example Company 3432",
+     * "description": "This is an example company description."
+     * }
+     */
 }

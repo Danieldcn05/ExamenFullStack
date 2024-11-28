@@ -20,7 +20,7 @@ import com.cinexpress.videofriend.services.PremiumSubscriptionService;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-   @Autowired
+    @Autowired
     private CustomerService customerService;
 
     @Autowired
@@ -28,64 +28,79 @@ public class CustomerController {
 
     @PostMapping("")
     public ResponseEntity<Customer> createCustomer(@RequestBody CustomerDTO customerDTO) {
-        
+
         Customer newCustomer = customerService.createCustomer(customerDTO);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
-    
+    /*
+     * {
+     * "name": "Juan",
+     * "type": "Regular",
+     * "preferences": ["Action", "Comedy"],
+     * "subscription": "Monthly"
+     * }
+     */
+
     @PostMapping("/addClientToCompany/{customerId}/{companyId}")
-    public ResponseEntity<Void> addClientToCompany(@PathVariable Long customerId, @PathVariable Long companyId){
-        try{
+    public ResponseEntity<Void> addClientToCompany(@PathVariable Long customerId, @PathVariable Long companyId) {
+        try {
             customerService.addClientToCompany(customerId, companyId);
             return ResponseEntity.status(HttpStatus.OK).build();
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-                
+
     }
 
     @PostMapping("/addMovieToCustomer/{customerId}/{movieId}")
-    public ResponseEntity<Void> addMovieToCustomer(@PathVariable Long customerId, @PathVariable Long movieId){
-        try{
+    public ResponseEntity<Void> addMovieToCustomer(@PathVariable Long customerId, @PathVariable Long movieId) {
+        try {
             customerService.addMovieToCustomer(customerId, movieId);
             return ResponseEntity.status(HttpStatus.OK).build();
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-                
+
     }
 
     @GetMapping("/listMovies/{id}")
-    public ResponseEntity<?> listAllCustomerMovies(@PathVariable Long id){
+    public ResponseEntity<?> listAllCustomerMovies(@PathVariable Long id) {
         return ResponseEntity.ok(customerService.listAllCustomerMovies(id));
     }
 
     @PutMapping("/activatePremiumSubscription/{customerId}")
-    public ResponseEntity<PremiumSubscription> activatePremiumSubscription(@PathVariable Long customerId, @RequestBody PremiumSubscription ps){
+    public ResponseEntity<PremiumSubscription> activatePremiumSubscription(@PathVariable Long customerId,
+            @RequestBody PremiumSubscription ps) {
 
         return ResponseEntity.ok(premiumSubscriptionService.activatePremiumSubscription(customerId, ps));
-    
-    }
 
+    }
+    /*
+     * {
+     * "exclusiveCatalog":true,
+     * "discounts":true,
+     * "preReleases":true
+     * }
+     */
 
     @GetMapping("/hasPremiumSubscription/{customerId}")
-    public ResponseEntity<Boolean> hasPremiumSubscription(@PathVariable Long customerId){
+    public ResponseEntity<Boolean> hasPremiumSubscription(@PathVariable Long customerId) {
         return ResponseEntity.ok(customerService.hasPremiumSubscription(customerId));
     }
 
     @PutMapping("/deactivatePremiumSubscription/{customerId}")
-    public ResponseEntity<Void> deactivatePremiumSubscription(@PathVariable Long customerId){
+    public ResponseEntity<Void> deactivatePremiumSubscription(@PathVariable Long customerId) {
         customerService.deactivatePremiumSubscription(customerId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/hasDiscount/{customerId}")
-    public ResponseEntity<Boolean> hasDiscount(@PathVariable Long customerId){
+    public ResponseEntity<Boolean> hasDiscount(@PathVariable Long customerId) {
         return ResponseEntity.ok(premiumSubscriptionService.hasDiscount(customerId));
     }
 
     @GetMapping("/hasExclusiveCatalog/{customerId}")
-    public ResponseEntity<Boolean> hasExclusiveCatalog(@PathVariable Long customerId){
+    public ResponseEntity<Boolean> hasExclusiveCatalog(@PathVariable Long customerId) {
         return ResponseEntity.ok(premiumSubscriptionService.hasExcusiveCatalog(customerId));
     }
 }

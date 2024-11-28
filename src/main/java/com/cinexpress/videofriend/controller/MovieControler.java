@@ -27,11 +27,31 @@ public class MovieControler {
         return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
     }
 
+    /*
+     * {
+     * "title": "Oldboy",
+     * "format": "Blu-ray",
+     * "genre": "Thriller",
+     * "language": "Korean",
+     * "availability": true
+     * }
+     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody MovieDTO movieDTO) {
-        Movie updatedMovie = movieService.updateMovie(id,movieDTO);
+        Movie updatedMovie = movieService.updateMovie(id, movieDTO);
         return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
     }
+
+    /*
+     * {
+     * "title": "Inceptiooon",
+     * "format": "Blu-ray",
+     * "genre": "Science Fiction",
+     * "language": "English",
+     * "availability": true
+     * }
+     */
 
     @PutMapping("/availability/{id}")
     public ResponseEntity<Movie> updateAvailability(@PathVariable Long id) {
