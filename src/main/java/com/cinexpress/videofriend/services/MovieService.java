@@ -1,9 +1,10 @@
 package com.cinexpress.videofriend.services;
 
 import com.cinexpress.videofriend.models.Movie;
+import com.cinexpress.videofriend.models.dtos.MovieDTO;
 
 public interface MovieService {
-    void addMovie(Movie movie);
-    void updateMovie(Movie move);
-    void updateAvailability(Movie movie);
+    Movie addMovie(MovieDTO movieDTO);
+    Movie updateMovie(Long id,MovieDTO moveDTO);
+    Movie updateAvailability(Long id);
 }

@@ -6,5 +6,5 @@ Examen practico
     Esta funcion no tiene sentido en este metodo porque ......
 */
 3.- hay partes de clases incompletas, terminarlas
-4.- solo se deben tratar 2 controladores y arreglar los servicios que estan avanzados
+4.- solo se deben tratar 3 controladores y arreglar los servicios que estan avanzados
 5.- se espera que para el sprint se tengan los endpoints para compañia, cliente y peliculas

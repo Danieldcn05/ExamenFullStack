@@ -1,4 +1,6 @@
 package com.cinexpress.videofriend.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,5 +28,10 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore // Ya que no usamos los mappers, para evitar un loop infinito
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory; 
 }
